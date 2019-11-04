@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29123.88
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VRCPhotoRotationCorrector", "VRCPhotoRotationCorrector\VRCPhotoRotationCorrector.csproj", "{3ED279E5-E26E-4761-A0DC-D6464F57F9B6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3ED279E5-E26E-4761-A0DC-D6464F57F9B6}.Debug|x64.ActiveCfg = Debug|x64
+		{3ED279E5-E26E-4761-A0DC-D6464F57F9B6}.Debug|x64.Build.0 = Debug|x64
+		{3ED279E5-E26E-4761-A0DC-D6464F57F9B6}.Release|x64.ActiveCfg = Release|x64
+		{3ED279E5-E26E-4761-A0DC-D6464F57F9B6}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9B884CD6-F231-4DB1-82A3-479822556657}
+	EndGlobalSection
+EndGlobal
