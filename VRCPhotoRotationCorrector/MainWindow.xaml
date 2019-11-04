@@ -1,0 +1,41 @@
+﻿<Window x:Class="VRCPhotoRotationCorrector.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:VRCPhotoRotationCorrector"
+        mc:Ignorable="d"
+        Title="VRCPhotoRotationCorrector" SizeToContent="Height" Width="500">
+
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="5"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="5"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="5"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="0">Target Folder:</TextBlock>
+            <TextBox Grid.Column="2" x:Name="DirectoryTextBox"/>
+            <Button Grid.Column="4" Padding="7,0,7,0" x:Name="DirectorySelectButton" Click="DirectorySelectButton_Click">...</Button>
+        </Grid>
+
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="5"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <ProgressBar x:Name="CorrectionProgress"/>
+            <Button Grid.Column="2" Padding="7,0,7,0" x:Name="CorrectButton" Click="CorrectButton_Click">Correct</Button>
+        </Grid>
+    </Grid>
+</Window>
