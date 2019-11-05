@@ -4,4 +4,6 @@
 
 /VRCPhotoRotationCorrector/bin
 /VRCPhotoRotationCorrector/obj
+/VRCPhotoRotationCorrector/*.user
+/VRCPhotoRotationCorrector/*.pfx
 /.vs/VRCPhotoRotationCorrector/v16
