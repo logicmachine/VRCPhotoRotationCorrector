@@ -128,7 +128,7 @@ namespace VRCPhotoRotationCorrector
             {
                 if(rot != 0) { Rotate90(source); }
                 var tensor = new DenseTensor<float>(source, dims);
-                var inputs = new List<NamedOnnxValue>() { NamedOnnxValue.CreateFromTensor<float>("Input3", tensor) };
+                var inputs = new List<NamedOnnxValue>() { NamedOnnxValue.CreateFromTensor<float>("input.1", tensor) };
                 using (var results = session.Run(inputs))
                 {
                     foreach(var r in results)

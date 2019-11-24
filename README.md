@@ -3,7 +3,7 @@ VRCPhotoRotationCorrector
 
 VRChatのカメラ機能で撮影した画像の向きを一括で補正します。
 
-向きの検出には[はこつきさんの成果](https://github.com/rehakomoon/VRC_PhotoRotation_Estimation) を利用しています。
+向きの検出には[はこつきさんの成果](https://github.com/rehakomoon/VRC_PhotoRotation_Estimation)を利用しています。
 
 ## 使い方
 1. `VRCPhotoRotationCorrector.exe` を起動します
