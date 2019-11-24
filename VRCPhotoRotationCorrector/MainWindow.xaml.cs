@@ -33,6 +33,31 @@ namespace VRCPhotoRotationCorrector
             InitializeComponent();
         }
 
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            LoadSettings();
+        }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            StoreSettings();
+        }
+
+        private void LoadSettings()
+        {
+            var settings = Properties.Settings.Default;
+            DirectoryTextBox.Text = settings.TargetDirectory;
+            RecursiveCheck.IsChecked = settings.Recursive;
+        }
+
+        private void StoreSettings()
+        {
+            var settings = Properties.Settings.Default;
+            settings.TargetDirectory = DirectoryTextBox.Text;
+            settings.Recursive = RecursiveCheck.IsChecked.Value;
+            settings.Save();
+        }
+
         private InferenceSession InitializeSession()
         {
             if(_session == null)
@@ -162,6 +187,20 @@ namespace VRCPhotoRotationCorrector
             // MessageBox.Show(path + ": " + probs[0].ToString() + ", " + probs[1].ToString() + ", " + probs[2].ToString() + ", " + probs[3].ToString());
         }
 
+        private List<string> EnumerateFiles(string directory, bool isRecursive)
+        {
+            var output = new List<string>();
+            output.AddRange(Directory.EnumerateFiles(directory).Where(s => s.EndsWith(".png")));
+            if (isRecursive)
+            {
+                foreach (string d in Directory.GetDirectories(directory))
+                {
+                    output.AddRange(EnumerateFiles(Path.Combine(directory, d), isRecursive));
+                }
+            }
+            return output;
+        }
+
         private async void CorrectButton_Click(object sender, RoutedEventArgs e)
         {
             var directory = DirectoryTextBox.Text;
@@ -171,9 +210,7 @@ namespace VRCPhotoRotationCorrector
                 return;
             }
             var session = InitializeSession();
-            var paths = Directory.EnumerateFiles(directory)
-                .Where(s => s.EndsWith(".png"))
-                .ToList();
+            var paths = EnumerateFiles(directory, RecursiveCheck.IsEnabled);
             CorrectionProgress.Minimum = 0;
             CorrectionProgress.Maximum = paths.Count;
             CorrectButton.IsEnabled = false;

@@ -5,7 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:VRCPhotoRotationCorrector"
         mc:Ignorable="d"
-        Title="VRCPhotoRotationCorrector" SizeToContent="Height" Width="500">
+        Title="VRCPhotoRotationCorrector" SizeToContent="Height" Width="500"
+        Loaded="Window_Loaded"
+        Closed="Window_Closed">
 
     <Grid Margin="10">
         <Grid.RowDefinitions>
@@ -29,13 +31,16 @@
 
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="5"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="5"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <ProgressBar x:Name="CorrectionProgress"/>
-            <Button Grid.Column="2" Padding="7,0,7,0" x:Name="CorrectButton" Click="CorrectButton_Click">Correct</Button>
+            <CheckBox Content="Recursive" IsChecked="False" x:Name="RecursiveCheck"/>
+            <ProgressBar Grid.Column="2" x:Name="CorrectionProgress"/>
+            <Button Grid.Column="4" Padding="7,0,7,0" x:Name="CorrectButton" Click="CorrectButton_Click">Correct</Button>
         </Grid>
     </Grid>
 </Window>
