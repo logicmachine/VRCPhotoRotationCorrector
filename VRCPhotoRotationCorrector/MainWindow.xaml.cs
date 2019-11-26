@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.IO;
@@ -132,12 +133,33 @@ namespace VRCPhotoRotationCorrector
         private void Correct(InferenceSession session, string path)
         {
             var rawImage = new BitmapImage();
-            using (var stream = File.OpenRead(path))
+            while (true)
             {
-                rawImage.BeginInit();
-                rawImage.CacheOption = BitmapCacheOption.OnLoad;
-                rawImage.StreamSource = stream;
-                rawImage.EndInit();
+                try
+                {
+                    using (var stream = File.OpenRead(path))
+                    {
+                        rawImage.BeginInit();
+                        rawImage.CacheOption = BitmapCacheOption.OnLoad;
+                        rawImage.StreamSource = stream;
+                        rawImage.EndInit();
+                    }
+                }
+                catch (System.IO.IOException e)
+                {
+                    var ret = WinForms.MessageBox.Show(
+                        e.Message, "VRCPhotoRotationCorrector",
+                        WinForms.MessageBoxButtons.RetryCancel);
+                    if(ret == WinForms.DialogResult.Retry)
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        return;
+                    }
+                }
+                break;
             }
             var scale = INPUT_SIZE / (double)Math.Max(rawImage.PixelWidth, rawImage.PixelHeight);
             var scaledImage = new TransformedBitmap(rawImage, new ScaleTransform(scale, scale));
@@ -210,7 +232,7 @@ namespace VRCPhotoRotationCorrector
                 return;
             }
             var session = InitializeSession();
-            var paths = EnumerateFiles(directory, RecursiveCheck.IsEnabled);
+            var paths = EnumerateFiles(directory, RecursiveCheck.IsChecked.Value);
             CorrectionProgress.Minimum = 0;
             CorrectionProgress.Maximum = paths.Count;
             CorrectButton.IsEnabled = false;
